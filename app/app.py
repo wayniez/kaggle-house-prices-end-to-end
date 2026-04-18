@@ -20,13 +20,21 @@ st.caption("Models: XGBoost + LightGBM + Ridge blend | Dataset: Kaggle House Pri
 # ── Models load ──────────────────────────────────────────────────────────
 @st.cache_resource
 def load_models():
-    models_dir = "models"
-    ridge         = joblib.load(os.path.join(models_dir, "ridge.pkl"))
-    xgb_model     = joblib.load(os.path.join(models_dir, "xgb_model.pkl"))
-    lgb_model     = joblib.load(os.path.join(models_dir, "lgb_model.pkl"))
-    blend_config  = joblib.load(os.path.join(models_dir, "blend_config.pkl"))
-    prep_config   = joblib.load(os.path.join(models_dir, "preprocessing_config.pkl"))
-    feature_names = pd.read_csv("data/processed/feature_names.csv")["feature"].tolist()
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+    models_dir = os.path.join(BASE_DIR, "models")
+    data_dir = os.path.join(BASE_DIR, "data", "processed")
+
+    ridge = joblib.load(os.path.join(models_dir, "ridge.pkl"))
+    xgb_model = joblib.load(os.path.join(models_dir, "xgb_model.pkl"))
+    lgb_model = joblib.load(os.path.join(models_dir, "lgb_model.pkl"))
+    blend_config = joblib.load(os.path.join(models_dir, "blend_config.pkl"))
+    prep_config = joblib.load(os.path.join(models_dir, "preprocessing_config.pkl"))
+
+    feature_names = pd.read_csv(
+        os.path.join(data_dir, "feature_names.csv")
+    )["feature"].tolist()
+
     return ridge, xgb_model, lgb_model, blend_config, prep_config, feature_names
 
 @st.cache_resource
