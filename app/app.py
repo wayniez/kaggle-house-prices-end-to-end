@@ -37,11 +37,6 @@ def load_models():
 
     return ridge, xgb_model, lgb_model, blend_config, prep_config, feature_names
 
-@st.cache_resource
-def load_train_data():
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    data_path = os.path.join(BASE_DIR, "data", "processed", "train.csv")
-    return pd.read_csv(data_path)
 
 try:
     ridge, xgb_model, lgb_model, blend_config, prep_config, feature_names = load_models()
