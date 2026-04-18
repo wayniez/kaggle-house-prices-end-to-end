@@ -40,10 +40,9 @@ def load_models():
 
 try:
     ridge, xgb_model, lgb_model, blend_config, prep_config, feature_names = load_models()
-    X_train_ref = load_train_data()
     models_loaded = True
 except Exception as e:
-    st.error(f"Model load error {e}")
+    st.error(f"Model load error: {e}")
     models_loaded = False
     st.stop()
 
@@ -151,7 +150,8 @@ if predict_btn:
     neigh_enc = encode_label(neighborhood, NEIGHBORHOODS)
     oc_enc    = int(overall_cond)
 
-    row = X_train_ref.median().to_dict()
+    medians = joblib.load(os.path.join(models_dir, "medians.pkl"))
+    row = medians.copy()
 
 
     known = {
