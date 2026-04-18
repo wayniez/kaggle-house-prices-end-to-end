@@ -40,7 +40,7 @@ def load_models():
 @st.cache_resource
 def load_train_data():
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    data_path = os.path.join(BASE_DIR, "data", "processed", "X_train.csv")
+    data_path = os.path.join(BASE_DIR, "data", "processed", "train.csv")
     return pd.read_csv(data_path)
 
 try:
