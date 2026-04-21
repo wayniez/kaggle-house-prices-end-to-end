@@ -111,8 +111,5 @@ This project includes a `.devcontainer` configuration for VS Code. To use it:
 
 All dependencies will be installed automatically inside the container.
 
----
 
-## License
 
-This project is open source and available under the [MIT License](LICENSE).
