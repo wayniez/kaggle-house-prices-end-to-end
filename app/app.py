@@ -112,9 +112,13 @@ with col3:
     garage_area   = st.number_input("Garage area (sq. m.)", 0, 1500, 480, step=20)
     garage_cars   = st.selectbox("Garage spaces", [0, 1, 2, 3, 4], index=2)
     garage_finish = st.selectbox("Garage Finishing", GARAGE_FINISH, index=2)
+    garage_yr_blt = st.number_input("Year garage was built", min_value=1872, max_value=2010, value=1980, step=1)
     year_built    = st.number_input("Year built", 1872, 2010, 1980, step=1)
     year_remod    = st.number_input("The Year of Renovation", 1950, 2010, 1995, step=1)
     full_bath     = st.selectbox("Full bathrooms", [0, 1, 2, 3, 4], index=2)
+    half_bath      = st.selectbox("Half bathrooms", [0, 1, 2], index=0)        
+    bsmt_full_bath = st.selectbox("Basement full bathrooms", [0, 1, 2], index=0)  
+    bsmt_half_bath = st.selectbox("Basement half bathrooms", [0, 1], index=0)  
     fireplaces    = st.selectbox("Fireplaces", [0, 1, 2, 3], index=0)
     neighborhood  = st.selectbox("Neighborhood", NEIGHBORHOODS, index=12)
 
@@ -125,10 +129,10 @@ if predict_btn:
     yr_sold = 2010  
 
     total_sf           = total_bsmt_sf + first_flr_sf + second_flr_sf
-    total_bath         = full_bath
+    total_bath         = full_bath + 0.5 * half_bath + bsmt_full_bath + 0.5 * bsmt_half_bath
     house_age          = yr_sold - year_built
     remod_age          = yr_sold - year_remod
-    garage_age         = max(0, yr_sold - year_built)
+    garage_age         = max(0, yr_sold - garage_yr_blt) if has_garage else 0
     is_remodeled       = int(year_built != year_remod)
     is_new             = int(year_built == yr_sold)
     has_garage         = int(garage_area > 0)
@@ -140,6 +144,7 @@ if predict_btn:
     oq_total_sf        = overall_qual * total_sf
     oq_gr_liv          = overall_qual * gr_liv_area
     oq_total_bath      = overall_qual * total_bath
+    
 
     eq_enc  = ORDINAL['ExterQual'][exter_qual]
     kq_enc  = ORDINAL['KitchenQual'][kitchen_qual]
