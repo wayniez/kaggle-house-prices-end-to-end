@@ -132,10 +132,10 @@ if predict_btn:
     total_bath         = full_bath + 0.5 * half_bath + bsmt_full_bath + 0.5 * bsmt_half_bath
     house_age          = yr_sold - year_built
     remod_age          = yr_sold - year_remod
-    garage_age         = max(0, yr_sold - garage_yr_blt) if has_garage else 0
     is_remodeled       = int(year_built != year_remod)
     is_new             = int(year_built == yr_sold)
     has_garage         = int(garage_area > 0)
+    garage_age         = max(0, yr_sold - garage_yr_blt) if has_garage else 0
     has_bsmt           = int(total_bsmt_sf > 0)
     has_fireplace      = int(fireplaces > 0)
     has_2nd_floor      = int(second_flr_sf > 0)
