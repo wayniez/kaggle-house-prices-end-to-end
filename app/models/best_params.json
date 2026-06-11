@@ -1,0 +1,25 @@
+{
+  "ridge": {
+    "alpha": 0.6676653636204392
+  },
+  "lgb": {
+    "n_estimators": 1600,
+    "learning_rate": 0.011230452218479414,
+    "num_leaves": 111,
+    "max_depth": 4,
+    "min_child_samples": 11,
+    "subsample": 0.6373982609710553,
+    "subsample_freq": 9,
+    "colsample_bytree": 0.3002442940653411,
+    "reg_alpha": 1.4359807921442981e-07,
+    "reg_lambda": 3.357946522354754e-07,
+    "min_split_gain": 0.0016436880957778378,
+    "n_jobs": -1,
+    "random_state": 42,
+    "verbose": -1
+  },
+  "scores": {
+    "ridge_rmsle": 0.11870655903499201,
+    "lgb_rmsle": 0.11637805759960915
+  }
+}
